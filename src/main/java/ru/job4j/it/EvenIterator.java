@@ -14,23 +14,22 @@ public class EvenIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        int i = point;
-        while (array[i] % 2 != 0) {
-            i++;
-            if (i == array.length) {
+        if (point == array.length) {
+            return false;
+        }
+        while (array[point] % 2 != 0) {
+            point++;
+            if (point == array.length) {
                 return false;
             }
         }
-        return i < array.length;
+        return point < array.length;
     }
 
     @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
-        }
-        while (array[point] % 2 != 0) {
-            point++;
         }
         return array[point++];
     }
