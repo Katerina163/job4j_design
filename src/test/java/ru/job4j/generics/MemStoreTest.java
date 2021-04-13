@@ -16,13 +16,13 @@ public class MemStoreTest {
         assertThat(mem.findById("user"), is(u2));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void delete() {
         User u = new User("user");
         MemStore<User> mem = new MemStore<>();
         mem.add(u);
         mem.delete("user");
-        mem.findById("user");
+        assertNull(mem.findById("user"));
     }
 
     @Test
