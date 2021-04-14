@@ -50,6 +50,10 @@ public class SimpleArray<T> implements Iterable<T> {
         modCount++;
     }
 
+    public int size() {
+        return count;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
