@@ -98,13 +98,9 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                point++;
-                if (point - 1 == 0) {
-                    return first.getItem();
-                } else {
-                    node = first.getNext();
-                    return node.getItem();
-                }
+                E value = node.item;
+                node = node.next;
+                return value;
             }
         };
     }
