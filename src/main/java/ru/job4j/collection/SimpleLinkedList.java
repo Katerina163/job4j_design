@@ -7,9 +7,9 @@ import java.util.Objects;
 
 public class SimpleLinkedList<E> implements List<E> {
     private static class Node<E> {
-        E item;
-        Node<E> next;
-        Node<E> prev;
+        private E item;
+        private Node<E> next;
+        private Node<E> prev;
 
         Node(Node<E> prev, E element, Node<E> next) {
             this.item = element;
@@ -41,6 +41,7 @@ public class SimpleLinkedList<E> implements List<E> {
             this.prev = prev;
         }
     }
+
     private Node<E> first;
     private Node<E> last;
     private int modCount = 0;
@@ -98,6 +99,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
+                point++;
                 E value = node.item;
                 node = node.next;
                 return value;
