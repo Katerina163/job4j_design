@@ -3,7 +3,7 @@ package ru.job4j.collection;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class SimpleSet<T> implements Set<T>{
+public class SimpleSet<T> implements Set<T> {
     private SimpleArray<T> set = new SimpleArray<>();
 
     @Override
