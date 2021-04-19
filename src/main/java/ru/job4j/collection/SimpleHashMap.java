@@ -29,7 +29,7 @@ public class SimpleHashMap<K, V> implements Iterable {
     }
 
     private static class MapEntry<K, V> implements Map<K, V>, Iterable<V> {
-        private final double LOAD_FACTOR = 0.75;
+        private static final double LOAD_FACTOR = 0.75;
         private Object[] container;
         private Object[] keyContainer;
         private int count = 0;

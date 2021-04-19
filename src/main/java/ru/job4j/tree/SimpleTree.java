@@ -9,9 +9,7 @@ public class SimpleTree<E> implements Tree<E> {
     public SimpleTree(final E root) {
         this.root = new Node<>(root);
     }
-//Метод должен проверять количество дочерних элементов в дереве.
-// Если их > 2 - то дерево не бинарное
-    //Написать тесты на проверку бинарности
+
     @Override
     public boolean isBinary() {
         return findByPredicate(c -> c.getChildren().size() > 2).isEmpty();
