@@ -8,11 +8,15 @@ public class EvenNumberFile {
             StringBuilder text = new StringBuilder();
             int read;
             while ((read = in.read()) != -1) {
-                if (read % 2 == 0) {
-                    text.append((char) read);
+                text.append((char) read);
+            }
+            String str = new String(text);
+            String[] array = str.split(System.lineSeparator());
+            for (String s : array) {
+                if (Integer.parseInt(s) % 2 == 0) {
+                    System.out.println(s);
                 }
             }
-            System.out.println(text);
         } catch (Exception e) {
             e.printStackTrace();
         }
