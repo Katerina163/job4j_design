@@ -8,19 +8,18 @@ import java.util.Objects;
 public class Analize {
     public static Info diff(List<User> previous, List<User> current) {
         Info check = new Info();
-        int currSize = current.size();
         Map<Integer, String> users = new HashMap<>();
         for (User u : previous) {
             users.put(u.id, u.name);
         }
         for (User u : current) {
+            if (users.containsKey(u.id) && !users.get(u.id).equals(u.name)) {
+                check.changed++;
+            }
             users.put(u.id, u.name);
         }
-        current.removeAll(previous);
         check.added = users.size() - previous.size();
-        check.changed = current.size() - check.added;
-        int nochanged = current.size() - check.added;
-        check.deleted = previous.size() - nochanged - check.changed;
+        check.deleted = users.size() - current.size();
         return check;
     }
 
