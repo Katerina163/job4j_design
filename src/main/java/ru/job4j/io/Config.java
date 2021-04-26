@@ -26,8 +26,6 @@ public class Config {
                                 s = s.substring(0, s.indexOf("="));
                                 if (s.equals("")) {
                                     throw new IllegalArgumentException();
-                                } else if (s.startsWith("#")) {
-
                                 }
                                 return s;
                             },
