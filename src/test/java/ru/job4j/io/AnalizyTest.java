@@ -1,6 +1,8 @@
 package ru.job4j.io;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,25 +13,36 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class AnalizyTest {
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
+
     @Test
-    public void test() {
+    public void test() throws IOException {
         Analizy analiz = new Analizy();
-        analiz.unavailable("./data/analiz.txt", "./data/analiz_result.txt");
-        List<String> result = new ArrayList<>();
-        result.add("500 10:57:01;10:58:01");
-        result.add("400 10:58:01;10:59:00");
-        result.add("500 11:01:02;11:00:00");
-        result.add("500 10:57:01;00:00:00");
+        File source = folder.newFile("source.txt");
+        File target = folder.newFile("target.txt");
+        try (PrintWriter out = new PrintWriter(source)) {
+            out.println("200 10:56:01" + System.lineSeparator() + System.lineSeparator()
+                      + "500 10:57:01" + System.lineSeparator() + System.lineSeparator()
+                    + "400 10:58:01" + System.lineSeparator() + System.lineSeparator()
+                    + "200 10:59:00" + System.lineSeparator() + System.lineSeparator()
+                    + "500 11:01:02" + System.lineSeparator() + System.lineSeparator()
+                    + "300 11:00:00" + System.lineSeparator() + System.lineSeparator()
+                    + "500 10:57:01" + System.lineSeparator() + System.lineSeparator()
+                    + "200 00:00:00" + System.lineSeparator() + System.lineSeparator()
+            );
+        }
+        analiz.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(
-                new FileReader("./data/analiz_result.txt"))) {
+                new FileReader(target))) {
             list = in.lines().collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertThat(list.get(0), is(result.get(0)));
-        assertThat(list.get(1), is(result.get(1)));
-        assertThat(list.get(2), is(result.get(2)));
-        assertThat(list.get(3), is(result.get(3)));
+        assertThat(list.get(0), is("500 10:57:01;10:58:01"));
+        assertThat(list.get(1), is("400 10:58:01;10:59:00"));
+        assertThat(list.get(2), is("500 11:01:02;11:00:00"));
+        assertThat(list.get(3), is("500 10:57:01;00:00:00"));
     }
 }
