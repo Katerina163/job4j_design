@@ -22,8 +22,8 @@ public class Search {
     }
 
     private static class SearchFiles extends SimpleFileVisitor<Path> {
-        List<Path> list = new ArrayList<>();
-        Predicate<Path> condition;
+        private List<Path> list = new ArrayList<>();
+        private Predicate<Path> condition;
 
         public SearchFiles(Predicate<Path> condition) {
             this.condition = condition;
