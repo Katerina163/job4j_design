@@ -14,17 +14,17 @@ public class AnalizyTest {
     @Test
     public void test() {
         Analizy analiz = new Analizy();
-        analiz.unavailable(".\\data\\analiz.txt", ".\\data\\analiz_result.txt");
+        analiz.unavailable("./data/analiz.txt", "./data/analiz_result.txt");
         List<String> result = new ArrayList<>();
-        result.add("500 10:57:01;10:58:00");
-        result.add("400 10:58:01;10:58:59");
-        result.add("500 11:01:02;10:59:59");
-        result.add("500 10:57:01;23:59:59");
+        result.add("500 10:57:01;10:58:01");
+        result.add("400 10:58:01;10:59:00");
+        result.add("500 11:01:02;11:00:00");
+        result.add("500 10:57:01;00:00:00");
         List<String> list = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(
-                new FileReader(".\\data\\analiz_result.txt"))) {
+                new FileReader("./data/analiz_result.txt"))) {
             list = in.lines().collect(Collectors.toList());
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         assertThat(list.get(0), is(result.get(0)));
