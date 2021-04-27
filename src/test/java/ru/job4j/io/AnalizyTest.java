@@ -25,11 +25,9 @@ public class AnalizyTest {
             out.println("200 10:56:01" + System.lineSeparator() + System.lineSeparator()
                       + "500 10:57:01" + System.lineSeparator() + System.lineSeparator()
                     + "400 10:58:01" + System.lineSeparator() + System.lineSeparator()
-                    + "200 10:59:00" + System.lineSeparator() + System.lineSeparator()
+                    + "200 10:59:01" + System.lineSeparator() + System.lineSeparator()
                     + "500 11:01:02" + System.lineSeparator() + System.lineSeparator()
-                    + "300 11:00:00" + System.lineSeparator() + System.lineSeparator()
-                    + "500 10:57:01" + System.lineSeparator() + System.lineSeparator()
-                    + "200 00:00:00" + System.lineSeparator() + System.lineSeparator()
+                    + "200 11:02:02" + System.lineSeparator() + System.lineSeparator()
             );
         }
         analiz.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
@@ -40,9 +38,7 @@ public class AnalizyTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertThat(list.get(0), is("500 10:57:01;10:58:01"));
-        assertThat(list.get(1), is("400 10:58:01;10:59:00"));
-        assertThat(list.get(2), is("500 11:01:02;11:00:00"));
-        assertThat(list.get(3), is("500 10:57:01;00:00:00"));
+        assertThat(list.get(0), is("500 10:57:01;10:59:01"));
+        assertThat(list.get(1), is("500 11:01:02;11:02:02"));
     }
 }

@@ -11,18 +11,17 @@ public class Analizy {
              PrintWriter out = new PrintWriter(
                      new BufferedOutputStream(
                         new FileOutputStream(target)))) {
-            boolean status = false;
+            boolean status = true;
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 if (line.equals("")) {
                     line = in.readLine();
                 }
                 String[] parts = line.split(" ");
-                if (status) {
-                    out.println(parts[1]);
+                if (status && (parts[0].startsWith("4") || parts[0].startsWith("5"))) {
+                    out.print(parts[0] + " " + parts[1]);
                     status = false;
-                }
-                if (parts[0].startsWith("4") || parts[0].startsWith("5")) {
-                    out.print(parts[0] + " " + parts[1] + ";");
+                } else if (!status && (parts[0].startsWith("2") || parts[0].startsWith("3"))) {
+                    out.println(";" + parts[1]);
                     status = true;
                 }
             }
