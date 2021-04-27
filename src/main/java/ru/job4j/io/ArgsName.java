@@ -15,10 +15,11 @@ public class ArgsName {
             throw new IllegalArgumentException();
         }
         for (String s : args) {
-            if (s.substring(1, s.indexOf("=")).length() == 0 || s.substring(s.indexOf("=") + 1).length() == 0) {
+            String[] array = s.split("=");
+            if (array[0].length() == 0 || array[1].length() == 0) {
                 throw new IllegalArgumentException();
             }
-            values.put(s.substring(1, s.indexOf("=")), s.substring(s.indexOf("=") + 1));
+            values.put(array[0].substring(1), array[1]);
         }
     }
 
@@ -31,7 +32,6 @@ public class ArgsName {
     public static void main(String[] args) {
         ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
         System.out.println(jvm.get("Xmx"));
-
         ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
