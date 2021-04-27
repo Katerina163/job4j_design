@@ -8,17 +8,19 @@ import java.util.List;
 import java.util.Map;
 
 public class MainZip {
-    private ArgsName argsName = new ArgsName();
 
-    public void toZip(String[] args) throws IOException {
-        this.argsName = ArgsName.of(args);
-        if (argsName.get("d") == null
-                || argsName.get("e") == null
-                || argsName.get("o") == null) {
-            throw new IllegalArgumentException();
-        }
+    public void toZip(ArgsName argsName) throws IOException {
         List<Path> list = Search.search(Path.of(argsName.get("d")),
                 s -> s.toFile().getName().endsWith(argsName.get("e")));
         Zip.packFiles(list, new File(argsName.get("o")));
+    }
+
+    public static void main(String[] args) throws IOException {
+        if (args.length != 3) {
+            throw new IllegalArgumentException();
+        }
+        MainZip main = new MainZip();
+        ArgsName arg = ArgsName.of(args);
+        main.toZip(arg);
     }
 }
