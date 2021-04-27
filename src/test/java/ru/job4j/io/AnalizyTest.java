@@ -22,13 +22,11 @@ public class AnalizyTest {
         File source = folder.newFile("source.txt");
         File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
-            out.println("200 10:56:01" + System.lineSeparator() + System.lineSeparator()
-                      + "500 10:57:01" + System.lineSeparator() + System.lineSeparator()
-                    + "400 10:58:01" + System.lineSeparator() + System.lineSeparator()
-                    + "200 10:59:01" + System.lineSeparator() + System.lineSeparator()
-                    + "500 11:01:02" + System.lineSeparator() + System.lineSeparator()
-                    + "200 11:02:02" + System.lineSeparator() + System.lineSeparator()
-            );
+            out.println("200 10:56:01");
+            out.println("500 10:57:01");
+            out.println("200 10:59:01");
+            out.println("500 11:01:02");
+            out.println("200 11:02:02");
         }
         analiz.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         List<String> list = new ArrayList<>();
