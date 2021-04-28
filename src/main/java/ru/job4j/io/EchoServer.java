@@ -3,6 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class EchoServer {
     public static void main(String[] args) throws IOException {
@@ -14,11 +15,12 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     String str;
                     while (!(str= in.readLine()).isEmpty()) {
-                        System.out.println(str);
                         if (str.contains("Bye")) {
+                            out.write("HTTP/1.1 200 OK\r\n".getBytes());
                             server.close();
                         }
                     }
+                    out.write("HTTP/1.1 200 OK\r\n".getBytes());
                 }
             }
         }
