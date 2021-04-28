@@ -23,9 +23,6 @@ public class ConsoleChat {
     }
 
     public void run() {
-        try (BufferedWriter out = new BufferedWriter(
-                                     new FileWriter(path, Charset.forName("UTF-8"))
-        )) {
             Scanner input = new Scanner(System.in);
             System.out.println("Здравствуй. Задавай вопрос");
             listOfDialog.add("Здравствуй. Задавай вопрос");
@@ -51,9 +48,16 @@ public class ConsoleChat {
                 answer = input.nextLine();
                 listOfDialog.add(answer);
                 }
+            out();
+    }
+
+    private void out() {
+        try (BufferedWriter out = new BufferedWriter(
+                new FileWriter(path, Charset.forName("UTF-8"))
+        )) {
             for (String s : listOfDialog) {
                 out.write(s + System.lineSeparator());
-            }
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }
