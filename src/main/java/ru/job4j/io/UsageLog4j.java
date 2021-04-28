@@ -7,10 +7,16 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        byte by = 1;
+        short s = 12;
+        char c = 'c';
+        int i = 66;
+        long l = 99L;
+        float f = 1.2F;
+        double d = 1.3D;
+        boolean bo = true;
+        LOG.debug(
+                "byte : {}, short : {}, char : {}, int : {}, long : {}, float : {}, double : {}, boolean : {}",
+                by, s, c, i, l, f, d, bo);
     }
 }
