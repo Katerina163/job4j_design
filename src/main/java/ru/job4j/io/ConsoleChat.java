@@ -62,7 +62,7 @@ public class ConsoleChat {
     private void botAns() {
         try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
             String s = in.readLine();
-            while (s!= null) {
+            while (s != null) {
                 listOfBotAnswer.add(s);
                 s = in.readLine();
             }
