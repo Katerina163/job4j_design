@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<school medicalRoom="true" numberOfTeachers="25" nameSchool="Школа №3">
+    <library books="5800"/>
+    <buildingTypes>
+        <buildingType>Трехэтажное</buildingType>
+        <buildingType>Кирпичное</buildingType>
+    </buildingTypes>
+</school>
