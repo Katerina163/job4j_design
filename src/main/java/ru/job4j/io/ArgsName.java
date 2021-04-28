@@ -16,7 +16,7 @@ public class ArgsName {
         }
         for (String s : args) {
             String[] array = s.split("=");
-            if (array[0].length() == 0 || array[1].length() == 0) {
+            if (array.length != 2 || array[0].length() == 0 || array[1].length() == 0) {
                 throw new IllegalArgumentException();
             }
             values.put(array[0].substring(1), array[1]);
