@@ -2,6 +2,8 @@ package ru.job4j.io;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,12 +13,13 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
-    private final int numberOfLines;
+    private final List<String> listOfBotAnswer = new ArrayList<>();
+    private final List<String> listOfDialog = new ArrayList<>();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
         this.botAnswers = botAnswers;
-        numberOfLines = numberOfLines();
+        botAns();
     }
 
     public void run() {
@@ -25,59 +28,47 @@ public class ConsoleChat {
         )) {
             Scanner input = new Scanner(System.in);
             System.out.println("Здравствуй. Задавай вопрос");
-            out.write("Здравствуй. Задавай вопрос" + System.lineSeparator());
+            listOfDialog.add("Здравствуй. Задавай вопрос");
             String answer = input.nextLine();
-            out.write(answer + System.lineSeparator());
+            listOfDialog.add(answer);
             while (!answer.equals(OUT)) {
                 if (answer.equals(STOP)) {
                     while (!answer.equals(CONTINUE)) {
                         answer = input.nextLine();
-                        out.write(answer + System.lineSeparator());
+                        listOfDialog.add(answer);
                     }
                     System.out.println("Задавай вопрос");
-                    out.write("Задавай вопрос" + System.lineSeparator());
+                    listOfDialog.add("Задавай вопрос");
                     answer = input.nextLine();
-                    out.write(answer + System.lineSeparator());
+                    listOfDialog.add(answer);
                     continue;
                 }
-                String answerBot = botAns();
+                String answerBot = listOfBotAnswer.get(new Random().nextInt(listOfBotAnswer.size()));
                 System.out.println(answerBot);
-                out.write(answerBot + System.lineSeparator());
+                listOfDialog.add(answerBot);
                 System.out.println("Задавай следующий вопрос");
-                out.write("Задавай следующий вопрос" + System.lineSeparator());
+                listOfDialog.add("Задавай следующий вопрос");
                 answer = input.nextLine();
-                out.write(answer + System.lineSeparator());
+                listOfDialog.add(answer);
                 }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private String botAns() {
-        int index = new Random().nextInt(numberOfLines);
-        try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
-            for (int i = 0; i < index; i++) {
-                in.readLine();
+            for (String s : listOfDialog) {
+                out.write(s + System.lineSeparator());
             }
-            return in.readLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
-    private int numberOfLines() {
-        int i = 0;
-        try (BufferedReader in = new BufferedReader(new FileReader(botAnswers))) {
-            i = in.lines().filter(a -> a.length() != 0).mapToInt(s -> 1).sum();
+    private void botAns() {
+        try (BufferedReader in = new BufferedReader(new FileReader(botAnswers, Charset.forName("UTF-8")))) {
+            String s = in.readLine();
+            while (s!= null) {
+                listOfBotAnswer.add(s);
+                s = in.readLine();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (i == 0) {
-            throw new IllegalArgumentException();
-        }
-        return i;
     }
 
     public static void main(String[] args) {
