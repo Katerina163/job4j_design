@@ -11,7 +11,7 @@ public class MainZip {
 
     public void toZip(ArgsName argsName) throws IOException {
         List<Path> list = Search.search(Path.of(argsName.get("d")),
-                s -> s.toFile().getName().endsWith(argsName.get("e")));
+                s -> !s.toFile().getName().endsWith(argsName.get("e")));
         Zip.packFiles(list, new File(argsName.get("o")));
     }
 
