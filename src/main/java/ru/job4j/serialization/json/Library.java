@@ -12,4 +12,8 @@ public class Library {
         return "Library{" + "books=" + books
                 + '\'' + '}';
     }
+
+    public int getBooks() {
+        return books;
+    }
 }
