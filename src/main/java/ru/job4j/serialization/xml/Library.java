@@ -1,7 +1,13 @@
-package ru.job4j.serialization.json;
+package ru.job4j.serialization.xml;
+
+import javax.xml.bind.annotation.XmlAttribute;
 
 public class Library {
+    @XmlAttribute
     private int books;
+
+    public Library() {
+    }
 
     public Library(int books) {
         this.books = books;
@@ -11,9 +17,5 @@ public class Library {
     public String toString() {
         return "Library{" + "books=" + books
                 + '\'' + '}';
-    }
-
-    public int getBooks() {
-        return books;
     }
 }

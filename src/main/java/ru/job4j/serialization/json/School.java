@@ -1,8 +1,5 @@
 package ru.job4j.serialization.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import java.util.Arrays;
 
 public class School {
@@ -31,23 +28,23 @@ public class School {
                 + '}';
     }
 
-    public static void main(String[] args) {
-        Library lib = new Library(5800);
-        String[] array = {"Трехэтажное", "Кирпичное"};
-        final School school = new School(true, 25, "Школа №3", lib, array);
-        final Gson gson = new GsonBuilder().create();
-        System.out.println(gson.toJson(school));
-        final String schoolJson = "{" + "\"medicalRoom\":true,"
-                + "\"numberOfTeachers\":25,"
-                + "\"nameSchool\":\"Школа №3\","
-                + "\"library\":"
-                    + "{"
-                        + "\"books\":\"5800\""
-                        + "},"
-                + "\"buildingType\":"
-                    + "[\"Трехэтажное\",\"Кирпичное\"]"
-                + "}";
-        final School schoolMod = gson.fromJson(schoolJson, School.class);
-        System.out.println(schoolMod);
+    public boolean isMedicalRoom() {
+        return medicalRoom;
+    }
+
+    public int getNumberOfTeachers() {
+        return numberOfTeachers;
+    }
+
+    public String getNameSchool() {
+        return nameSchool;
+    }
+
+    public Library getLibrary() {
+        return library;
+    }
+
+    public String[] getBuildingType() {
+        return buildingType;
     }
 }

@@ -19,18 +19,23 @@ public class EchoServer {
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
                     String str = in.readLine();
+                    int i = 0;
                     while (!str.isEmpty()) {
-                        out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                         if (str.contains("Exit")) {
-                            server.close();
+                            i = 1;
                         } else if (str.contains("Hello")) {
-                            out.write("Hello, dear friend.\r\n\r\n".getBytes());
+                            i = 2;
                         } else if (str.contains("Any")) {
-                            out.write("What?\r\n\r\n".getBytes());
+                            i = 3;
                         }
                         str = in.readLine();
                     }
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    switch (i) {
+                        case 1 -> server.close();
+                        case 2 -> out.write("Hello, dear friend.\r\n\r\n".getBytes());
+                        case 3 -> out.write("What?\r\n\r\n".getBytes());
+                    }
                 }
             }
         } catch (IOException ioE) {

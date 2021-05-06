@@ -1,9 +1,5 @@
 package ru.job4j.generics;
 
-import org.hamcrest.internal.ArrayIterator;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
