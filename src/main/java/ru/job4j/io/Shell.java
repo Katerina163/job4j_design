@@ -1,51 +1,40 @@
 package ru.job4j.io;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Stack;
 
 public class Shell {
-    private List<String> adress = new ArrayList();
+    private Stack<String> add = new Stack<>();
 
     public void cd(String path) {
         String[] s = path.split("/");
-        if (adress.isEmpty()) {
-            for (String string : s) {
-                if (!string.isEmpty()) {
-                    adress.add(string);
-                }
-            }
+        if (add.empty()) {
+            absolute(s);
         } else {
             if (s[0].equals("..")) {
-                adress = new ArrayList<>();
-                if (s.length > 1) {
-                    adress.addAll(Arrays.asList(s).subList(1, s.length));
-                }
+                s[0] = "";
+                absolute(s);
             } else {
-                boolean b = false;
-                for (String string : s) {
-                    if (adress.contains(string)) {
-                        b = true;
-                        break;
-                    }
-                }
-                if (b) {
-                    adress = new ArrayList<>();
-                    cd(path);
+                if (s.length == 1) {
+                    add.push(s[0]);
                 } else {
-                    for (String string : s) {
-                        if (!string.isEmpty()) {
-                            adress.add(string);
-                        }
-                    }
+                    absolute(s);
                 }
+            }
+        }
+    }
+
+    private void absolute(String[] s) {
+        add = new Stack<>();
+        for (String string : s) {
+            if (!string.isEmpty()) {
+                add.push(string);
             }
         }
     }
 
     public String pwd() {
         StringBuilder sb = new StringBuilder();
-        for (String s : adress) {
+        for (String s : add) {
             sb.append("/");
             sb.append(s);
         }
