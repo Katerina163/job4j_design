@@ -32,9 +32,17 @@ public class EchoServer {
                     }
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     switch (i) {
-                        case 1 -> server.close();
-                        case 2 -> out.write("Hello, dear friend.\r\n\r\n".getBytes());
-                        case 3 -> out.write("What?\r\n\r\n".getBytes());
+                        case 1:
+                            server.close();
+                            break;
+                        case 2:
+                            out.write("Hello, dear friend.\r\n\r\n".getBytes());
+                            break;
+                        case 3:
+                            out.write("What?\r\n\r\n".getBytes());
+                            break;
+                        default:
+                            break;
                     }
                 }
             }

@@ -50,7 +50,5 @@ public class Main {
         jsonObject.put("buildingTypes", jsonBuild);
         System.out.println(jsonObject);
         System.out.println(new JSONObject(school));
-
-
     }
 }
