@@ -11,11 +11,14 @@ public class Shell {
             absolute(s);
         } else {
             if (s[0].equals("..")) {
-                s[0] = "";
                 absolute(s);
             } else {
-                if (s.length == 1) {
-                    add.push(s[0]);
+                if (!s[0].isEmpty()) {
+                    for (String string : s) {
+                        if (!string.isEmpty()) {
+                            add.push(string);
+                        }
+                    }
                 } else {
                     absolute(s);
                 }
@@ -26,7 +29,7 @@ public class Shell {
     private void absolute(String[] s) {
         add = new Stack<>();
         for (String string : s) {
-            if (!string.isEmpty()) {
+            if (!string.isEmpty() && !string.equals("..")) {
                 add.push(string);
             }
         }

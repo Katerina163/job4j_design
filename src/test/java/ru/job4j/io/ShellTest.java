@@ -52,4 +52,34 @@ public class ShellTest {
                 shell.pwd(), is("/")
         );
     }
+
+    @Test
+    public void whenTwoCd() {
+        Shell shell = new Shell();
+        shell.cd("path/to");
+        shell.cd("dir/file");
+        assertThat(
+                shell.pwd(), is("/path/to/dir/file")
+        );
+    }
+
+    @Test
+    public void whenCdWithSeparator() {
+        Shell shell = new Shell();
+        shell.cd("path/to");
+        shell.cd("/dir/file");
+        assertThat(
+                shell.pwd(), is("/dir/file")
+        );
+    }
+
+    @Test
+    public void whenCdBackTwo() {
+        Shell shell = new Shell();
+        shell.cd("path/to");
+        shell.cd("../../dir/file");
+        assertThat(
+                shell.pwd(), is("/dir/file")
+        );
+    }
 }
