@@ -1,14 +1,15 @@
 select p.name
-from product p
-where p.type_id = 2;
+from product p join type t on p.type_id = t.id
+where t.name like 'сыр';
 
 select p.name
 from product p
 where p.name like '%мороженое%';
 
-select p.name
+select p.name, p.expired_date
 from product p
-where p.expired_date = current_date + interval '1 month';
+where p.expired_date >= date_trunc('month', now()::date) + interval '1 month'
+and p.expired_date < date_trunc('month', now()::date) + interval '2 month';
 
 select p.name, p.price
 from product p
@@ -20,9 +21,9 @@ from product p join type t on t.id = p.type_id
 group by t.name;
 
 select p.name
-from product p
-where p.type_id = 1
-or p.type_id = 2;
+from product p join type t on t.id = p.type_id
+where t.name like 'сыр'
+or t.name like 'молоко';
 
 select t.name, count(t.id)
 from product p join type t on t.id = p.type_id
