@@ -19,6 +19,14 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
+    private void makeChanges(String string) {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(string);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initConnection() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         Path file = Paths.get("./data/app.properties");
@@ -32,63 +40,43 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String str = String.format(
+        String str = String.format(
                 "create table if not exists %s();",
                     tableName
-            );
-            statement.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        );
+        makeChanges(str);
     }
 
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String str = String.format(
-                    "drop table %s;",
-                    tableName
-            );
-            statement.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String str = String.format(
+                "drop table %s;",
+                tableName
+        );
+        makeChanges(str);
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        try (Statement statement = connection.createStatement()) {
-            String str = String.format(
+        String str = String.format(
                     "alter table %s add column %s %s;",
                     tableName, columnName, type
-            );
-            statement.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        );
+        makeChanges(str);
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String str = String.format(
-                    "alter table %s drop column %s;",
-                    tableName, columnName
-            );
-            statement.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String str = String.format(
+                "alter table %s drop column %s;",
+                tableName, columnName
+        );
+        makeChanges(str);
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
-            String str = String.format(
-                    "alter table %s rename column %s to %s;",
-                    tableName, columnName, newColumnName
-            );
-            statement.execute(str);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String str = String.format(
+                "alter table %s rename column %s to %s;",
+                tableName, columnName, newColumnName
+        );
+        makeChanges(str);
     }
 
     public String getScheme(String tableName) throws SQLException {
