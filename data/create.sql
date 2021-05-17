@@ -14,10 +14,6 @@ create table rules (
 	id serial primary key,
 	rights varchar(255) not null
 );
-create table comments (
-	id serial primary key,
-	text varchar not null
-);
 create table users (
 	id serial primary key,
 	name varchar(255) not null,
@@ -30,6 +26,11 @@ create table item (
 	user_id int references users(id),
 	category_id int references category(id),
 	states_id int references states(id)
+);
+create table comments (
+	id serial primary key,
+	item_id int references item(id),
+	text varchar not null
 );
 create table attachs (
 	id serial primary key,
