@@ -64,4 +64,5 @@ insert into teens(name, gender) values('Артём', 'М');
 insert into teens(name, gender) values('Евгений', 'М');
 
 select t.name, te.name
-from teens t cross join teens te;
+from teens t cross join teens te
+where t.gender != te.gender;
