@@ -20,9 +20,15 @@ public class ImportDB {
     }
 
     public List<User> load() throws IOException {
-        List<User> users = new ArrayList<>();
+        List<User> users;
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            users = rd.lines().map(s -> new User(s.substring(0, s.indexOf(";")), s.substring(s.indexOf(";") + 1, s.length() - 1)))
+            users = rd.lines().map(s -> {
+                String[] strings = s.split(";");
+                if (strings.length != 2) {
+                    throw new IllegalArgumentException();
+                }
+                return new User(strings[0], strings[1]);
+                })
                     .collect(Collectors.toList());
         }
         return users;
