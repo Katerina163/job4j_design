@@ -8,8 +8,7 @@ where p.name like '%мороженое%';
 
 select p.name, p.expired_date
 from product p
-where p.expired_date >= date_trunc('month', now()::date) + interval '1 month'
-and p.expired_date < date_trunc('month', now()::date) + interval '2 month';
+where date_part('month', p.expired_date) = date_part('month', now() + interval '1 month');
 
 select p.name, p.price
 from product p
