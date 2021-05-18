@@ -52,8 +52,8 @@ public class ImportDB {
     }
 
     private static class User {
-        String name;
-        String email;
+        private String name;
+        private String email;
 
         public User(String name, String email) {
             this.name = name;
