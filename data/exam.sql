@@ -37,8 +37,7 @@ on m.id = um.meetings_id
 where us.name = 'подтверждено'
 group by m.name;
 
-select m.name
-from users_meetings um join meetings m on m.id = um.meetings_id
-where um.name = 'отклонено'
-group by m.name
-having count(um.id) = (select count(id) from users);
+select m.name from meetings m left join users_meetings um on m.id = um.meetings_id
+except
+select m.name from meetings m left join users_meetings um on m.id = um.meetings_id
+where um.name = 'подтверждено';
