@@ -1,4 +1,4 @@
-package ru.job4j.serialization;
+package ru.job4j.gc;
 
 public class User {
     private int id;
