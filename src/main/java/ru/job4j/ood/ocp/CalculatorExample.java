@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 
 public class CalculatorExample {
     private static class SimpleCalculator {
-        public int sum (int a, int b) {
+        public int sum(int a, int b) {
             return a + b;
         }
     }
