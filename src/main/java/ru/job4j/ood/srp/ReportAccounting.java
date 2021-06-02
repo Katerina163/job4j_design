@@ -1,11 +1,29 @@
 package ru.job4j.ood.srp;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.function.Predicate;
-
+@XmlRootElement(name = "reportaccounting")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ReportAccounting implements Report {
+    @XmlAnyElement
     private Store store;
 
+    public ReportAccounting() {
+    }
+
     public ReportAccounting(Store store) {
+        this.store = store;
+    }
+
+    @Override
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
         this.store = store;
     }
 
