@@ -44,20 +44,4 @@ public class ReportEngine implements Report {
     public String toString() {
         return "ReportEngine{" + "store=" + store + '}';
     }
-
-    public static void main(String[] args) throws Exception {
-        Employer e = new Employer("w", null, null, 9.2);
-        MemStore m = new MemStore();
-        m.add(e);
-        ReportEngine re = new ReportEngine(m);
-        JAXBContext context = JAXBContext.newInstance(re.getClass(), MemStore.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        String xml = "";
-        try (StringWriter writer = new StringWriter()) {
-            marshaller.marshal(re, writer);
-            xml = writer.getBuffer().toString();
-            System.out.println(xml);
-        }
-    }
 }
