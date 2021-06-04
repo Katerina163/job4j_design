@@ -1,11 +1,11 @@
 package ru.job4j.ood.lsp.parking;
 
+import java.util.List;
+
 public interface Parking {
-    int getParkingSpaceCar();
+    boolean addCar(Car car);
 
-    void setParkingSpaceCar(int parkingSpaceCar);
+    List<Car> getCars();
 
-    int getParkingSpaceTruck();
-
-    void setParkingSpaceTruck(int parkingSpaceTruck);
+    List<Car> getTrucks();
 }

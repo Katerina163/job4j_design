@@ -8,15 +8,10 @@ public class Service {
     }
 
     public boolean parkCar(Car car) {
-        if (car.getSize() == 1 && parking.getParkingSpaceCar() > 0) {
-            parking.setParkingSpaceCar(parking.getParkingSpaceCar() - 1);
-        } else if (parking.getParkingSpaceTruck() >= car.getSize()) {
-            parking.setParkingSpaceTruck(parking.getParkingSpaceTruck() - car.getSize());
-        } else if (parking.getParkingSpaceCar() >= car.getSize()) {
-            parking.setParkingSpaceCar(parking.getParkingSpaceCar() - car.getSize());
-        } else {
-            return false;
-        }
-        return true;
+        return parking.addCar(car);
+    }
+
+    public Parking getParking() {
+        return parking;
     }
 }
