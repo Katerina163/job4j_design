@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
-    private Map<String, Task> map;
     private static final String EXIT = "выход";
+    private Map<String, Task> map;
 
     public static void main(String[] args) {
         Menu m = new Menu();
@@ -36,30 +36,29 @@ public class Menu {
         }
         System.out.println("Меню:");
         for (var m : this.map.entrySet()) {
-            int i = m.getKey().length();
-            switch (i) {
-                case 1 ->
-                    System.out.println("Задача " + m.getValue().getName());
-                case 3 ->
-                    System.out.println("--Задача " + m.getValue().getName());
-                case 5 ->
-                    System.out.println("----Задача " + m.getValue().getName());
-                default ->
-                    System.out.println("Что-то пошло не так");
-            }
+            System.out.println("Задача " + m.getKey());
         }
         System.out.print("Введите номер задачи: ");
     }
 
     private void setMap() {
-        this.map.put("1", new TaskOne("1"));
-        this.map.put("1.1", new TaskOne("1.1"));
-        this.map.put("1.1.1", new TaskOne("1.1.1"));
-        this.map.put("1.1.2", new TaskOne("1.1.2"));
-        this.map.put("1.2", new TaskOne("1.2"));
-        this.map.put("2", new TaskOne("2"));
-        this.map.put("2.1", new TaskOne("2.1"));
-        this.map.put("2.1.1", new TaskOne("2.1.1"));
-        this.map.put("3", new TaskOne("3"));
+        Task one = new TaskOne("1");
+        this.map.put("1", one);
+        one.addTask(new TaskOne("1.1"));
+        this.map.put(one.getTask("1.1").getName(), one.getTask("1.1"));
+        one.addTask(new TaskOne("1.1.1"));
+        this.map.put(one.getTask("1.1.1").getName(), one.getTask("1.1.1"));
+        one.addTask(new TaskOne("1.1.2"));
+        this.map.put(one.getTask("1.1.2").getName(), one.getTask("1.1.2"));
+        one.addTask(new TaskOne("1.2"));
+        this.map.put(one.getTask("1.2").getName(), one.getTask("1.2"));
+        Task two = new TaskOne("2");
+        this.map.put("2", two);
+        two.addTask(new TaskOne("2.1"));
+        this.map.put(two.getTask("2.1").getName(), two.getTask("2.1"));
+        two.addTask(new TaskOne("2.2"));
+        this.map.put(two.getTask("2.2").getName(), two.getTask("2.2"));
+        two.addTask(new TaskOne("2.2.1"));
+        this.map.put(two.getTask("2.2.1").getName(), two.getTask("2.2.1"));
     }
 }
