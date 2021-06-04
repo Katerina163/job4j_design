@@ -1,12 +1,10 @@
 package ru.job4j.ood.isp;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
     private static final String EXIT = "выход";
-    private Map<String, Task> map;
+    private Tree<String, String> tree;
 
     public static void main(String[] args) {
         Menu m = new Menu();
@@ -18,8 +16,8 @@ public class Menu {
         callMenu();
         String answer = scanner.next();
         while (!answer.equals(EXIT)) {
-            if (map.containsKey(answer)) {
-                map.get(answer).doSomething();
+            if (tree.contains(answer)) {
+                tree.get(answer);
             } else {
                 System.out.println("Введен неправильный номер задачи");
             }
@@ -30,35 +28,22 @@ public class Menu {
     }
 
     private void callMenu() {
-        if (this.map == null) {
-            this.map = new LinkedHashMap<>();
-            setMap();
+        if (tree == null) {
+            tree = new TaskTree(new Tree.Node("root", ""));
+            setTree();
         }
         System.out.println("Меню:");
-        for (var m : this.map.entrySet()) {
-            System.out.println("Задача " + m.getKey());
-        }
+        tree.ordered();
         System.out.print("Введите номер задачи: ");
     }
 
-    private void setMap() {
-        Task one = new TaskOne("1");
-        this.map.put("1", one);
-        one.addTask(new TaskOne("1.1"));
-        this.map.put(one.getTask("1.1").getName(), one.getTask("1.1"));
-        one.addTask(new TaskOne("1.1.1"));
-        this.map.put(one.getTask("1.1.1").getName(), one.getTask("1.1.1"));
-        one.addTask(new TaskOne("1.1.2"));
-        this.map.put(one.getTask("1.1.2").getName(), one.getTask("1.1.2"));
-        one.addTask(new TaskOne("1.2"));
-        this.map.put(one.getTask("1.2").getName(), one.getTask("1.2"));
-        Task two = new TaskOne("2");
-        this.map.put("2", two);
-        two.addTask(new TaskOne("2.1"));
-        this.map.put(two.getTask("2.1").getName(), two.getTask("2.1"));
-        two.addTask(new TaskOne("2.2"));
-        this.map.put(two.getTask("2.2").getName(), two.getTask("2.2"));
-        two.addTask(new TaskOne("2.2.1"));
-        this.map.put(two.getTask("2.2.1").getName(), two.getTask("2.2.1"));
+    private void setTree() {
+        tree.add(tree.get("root"), "Задача 1", "Задача 1 что-то делает");
+        tree.add(tree.get("root"), "Задача 1.1", "Задача 1.1 что-то делает");
+        tree.add(tree.get("root"), "Задача 1.1.1", "Задача 1.1.1 что-то делает");
+        tree.add(tree.get("root"), "Задача 1.1.2", "Задача 1.1.2 что-то делает");
+        tree.add(tree.get("root"), "Задача 1.2", "Задача 1.2 что-то делает");
+        tree.add(tree.get("root"), "Задача 2", "Задача 2 что-то делает");
+        tree.add(tree.get("root"), "Задача 2.1", "Задача 2.1 что-то делает");
     }
 }
