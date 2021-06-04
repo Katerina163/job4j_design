@@ -6,9 +6,9 @@ import java.util.Optional;
 import java.util.Set;
 
 public class SimpleShopService {
+    private static final Logger LOGGER = Logger.getLogger("Shop logger");
     private ShopStore shopStore;
     private OrderService orderService;
-    private static final Logger LOGGER = Logger.getLogger("Shop logger");
 
     public SimpleShopService(ShopStore shopStore, OrderService orderService) {
         this.shopStore = shopStore;
