@@ -13,7 +13,8 @@ public class FormatterXML implements Formatter {
 
     @Override
     public String generate() throws Exception {
-        JAXBContext context = JAXBContext.newInstance(report.getClass(), report.getStore().getClass());
+        JAXBContext context = JAXBContext.newInstance(report.getClass(),
+                report.getStore().getClass());
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";

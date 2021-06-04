@@ -1,14 +1,10 @@
 package ru.job4j.ood.srp;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.StringWriter;
 import java.util.Formatter;
-import java.util.List;
 import java.util.function.Predicate;
 @XmlRootElement(name = "reportformatted")
 @XmlAccessorType(XmlAccessType.FIELD)
