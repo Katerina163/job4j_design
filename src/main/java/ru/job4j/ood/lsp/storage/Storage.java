@@ -8,4 +8,6 @@ public interface Storage {
     void add(Food food);
 
     Queue<Food> getQueue();
+
+    void setQueue(Queue<Food> queue);
 }

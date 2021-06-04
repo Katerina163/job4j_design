@@ -36,4 +36,9 @@ public class Warehouse implements Storage {
     public Queue<Food> getQueue() {
         return queue;
     }
+
+    @Override
+    public void setQueue(Queue<Food> queue) {
+        this.queue = queue;
+    }
 }
