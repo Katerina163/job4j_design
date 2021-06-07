@@ -11,12 +11,7 @@ public class Trash implements Storage {
     private Queue<Food> queue;
 
     public Trash() {
-        queue = new PriorityQueue<>(11, new Comparator<Food>() {
-            @Override
-            public int compare(Food food1, Food food2) {
-                return food1.expiryDate.compareTo(food2.expiryDate);
-            }
-        });
+        queue = new PriorityQueue<>(11, Comparator.comparing(food -> food.expiryDate));
     }
 
     @Override
