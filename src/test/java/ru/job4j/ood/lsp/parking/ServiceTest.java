@@ -21,7 +21,7 @@ public class ServiceTest {
 
     @Test
     public void parkingManyTrucks() {
-        Service service = new Service(new CarParking(2, 10));
+        Service service = new Service(new CarParking(2, 2));
         Car car1 = new Truck(5);
         Car car2 = new Truck(5);
         Car car3 = new Truck(2);

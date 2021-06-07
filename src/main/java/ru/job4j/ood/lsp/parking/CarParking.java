@@ -22,8 +22,8 @@ public class CarParking implements Parking {
                 return cars.add(car);
             }
         } else {
-            if (car.getSize() <= parkingSpaceTruck) {
-                parkingSpaceTruck -= car.getSize();
+            if (parkingSpaceTruck > 0) {
+                parkingSpaceTruck--;
                 return trucks.add(car);
             } else if (car.getSize() <= parkingSpaceCar) {
                 parkingSpaceCar -= car.getSize();
