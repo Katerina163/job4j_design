@@ -1,10 +1,11 @@
 package ru.job4j.ood.isp;
 
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Menu {
     private static final String EXIT = "выход";
-    private Tree<String, String> tree;
+    private TreeMap<Item, ActionOne> tree;
 
     public static void main(String[] args) {
         Menu m = new Menu();
@@ -16,8 +17,8 @@ public class Menu {
         callMenu();
         String answer = scanner.next();
         while (!answer.equals(EXIT)) {
-            if (tree.contains(answer)) {
-                tree.get(answer);
+            if (tree.containsKey(new Item(answer))) {
+                System.out.println(tree.get(new Item(answer)).doSomethind());
             } else {
                 System.out.println("Введен неправильный номер задачи");
             }
@@ -29,21 +30,24 @@ public class Menu {
 
     private void callMenu() {
         if (tree == null) {
-            tree = new TaskTree(new Tree.Node("root", ""));
+            tree = new TreeMap<>();
             setTree();
         }
         System.out.println("Меню:");
-        tree.ordered();
+        for (var a : tree.entrySet()) {
+            System.out.println("Задача " + a.getKey().getLevel());
+        }
         System.out.print("Введите номер задачи: ");
     }
 
     private void setTree() {
-        tree.add(tree.get("root"), "Задача 1", "Задача 1 что-то делает");
-        tree.add(tree.get("root"), "Задача 1.1", "Задача 1.1 что-то делает");
-        tree.add(tree.get("root"), "Задача 1.1.1", "Задача 1.1.1 что-то делает");
-        tree.add(tree.get("root"), "Задача 1.1.2", "Задача 1.1.2 что-то делает");
-        tree.add(tree.get("root"), "Задача 1.2", "Задача 1.2 что-то делает");
-        tree.add(tree.get("root"), "Задача 2", "Задача 2 что-то делает");
-        tree.add(tree.get("root"), "Задача 2.1", "Задача 2.1 что-то делает");
+        tree.put(new Item("1"), new ActionOne("1"));
+        tree.put(new Item("1.1"), new ActionOne("1.1"));
+        tree.put(new Item("1.1.1"), new ActionOne("1.1.1"));
+        tree.put(new Item("1.1.2"), new ActionOne("1.1.2"));
+        tree.put(new Item("1.2"), new ActionOne("1.2"));
+        tree.put(new Item("2"), new ActionOne("2"));
+        tree.put(new Item("2.1"), new ActionOne("2.1"));
+        tree.put(new Item("2.2"), new ActionOne("2.2"));
     }
 }
