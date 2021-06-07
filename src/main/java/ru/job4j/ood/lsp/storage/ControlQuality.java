@@ -15,21 +15,19 @@ public class ControlQuality {
                 storage.add(food);
             }
             if (!storage.accept(storage.getQueue().peek())) {
-                resort(storage);
+                resort();
             }
         }
     }
 
-    private void resort(Storage storage) {
-        Queue<Food> queue = new LinkedList<>(storage.getQueue());
-        storage.setQueue(new PriorityQueue<>(11, new Comparator<Food>() {
-            @Override
-            public int compare(Food food1, Food food2) {
-                return food1.expiryDate.compareTo(food2.expiryDate);
-            }
-        }));
-        for (Food food : queue) {
-            keep(food);
+    public void resort() {
+        Queue<Food> queue = new LinkedList<>();
+        for (Storage storage : storages) {
+            queue.addAll(storage.getQueue());
+            storage.setQueue(new PriorityQueue<>(11, Comparator.comparing(food -> food.expiryDate)));
+        }
+        for (Food f : queue) {
+            keep(f);
         }
     }
 
